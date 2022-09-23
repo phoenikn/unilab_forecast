@@ -1,5 +1,6 @@
 import os
 import sys
+import datetime
 
 import torch
 import torch.nn as nn
@@ -98,7 +99,8 @@ def implement():
         sys.stdout.flush()
 
         if avg_val_loss < best_loss:
-            torch.save(model.state_dict(), "../checkpoints/"+model_name+"_best.pth")
+            torch.save(model.state_dict(), "../checkpoints/"+model_name+"_"+ str(datetime.datetime.now().date())
+                       + ".pth")
             best_loss = avg_val_loss
 
         records = records.append({"epoch": epoch + 1, "train_loss": avg_train_loss, "val_loss": avg_val_loss},
